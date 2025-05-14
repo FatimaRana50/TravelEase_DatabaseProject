@@ -5,6 +5,13 @@ TravelEase is a comprehensive travel management system designed to streamline th
 Features
 Trip Search and Booking: Allows travelers to search for trips based on destination, activity type, group size, and more.
 
+## Trip Search Page
+
+This screenshot shows how users can search for trips using filters like destination and price.
+
+![Trip Search Page](DB_module2/TravelEase_screenshots/Traveler Interface/Screenshot 2025-05-14 134114)
+
+
 Service Provider Management: Enables service providers (hotels, tour operators, etc.) to list and manage their services, availability, and booking status.
 
 Booking Management: Provides an interface for users to view, confirm, or reject bookings, as well as track payments.
