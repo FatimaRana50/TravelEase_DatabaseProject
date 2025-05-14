@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="OperatorPerfomanceData" targetNamespace="http://tempuri.org/OperatorPerfomanceData.xsd" xmlns:mstns="http://tempuri.org/OperatorPerfomanceData.xsd" xmlns="http://tempuri.org/OperatorPerfomanceData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TravelEase2ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TravelEase2ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DB_module2.Properties.Settings.GlobalReference.Default.TravelEase2ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TourOperatorTableAdapter" GeneratorDataComponentClassName="TourOperatorTableAdapter" Name="TourOperator" UserDataComponentName="TourOperatorTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TravelEase2ConnectionString (Settings)" DbObjectName="TravelEase2.dbo.TourOperator" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    TO1.OperatorID,
+    TO1.CompanyName,
+
+    -- 1. Average Rating (from Review table)
+    ISNULL(AVG(DISTINCT R.Rating), 0) AS AverageRating,
+
+    -- 2. Total Revenue (from Payment table)
+    ISNULL(SUM(DISTINCT P.totalAmount), 0) AS TotalRevenueUSD,
+
+    -- 3. Average Response Time (from Inquiries table)
+    ISNULL(AVG(I.ResponseTime), 0) AS AverageResponseTimeMinutes
+
+FROM TourOperator TO1
+
+-- Join Bookings to connect with trips/reviews/payments
+LEFT JOIN Booking B 
+    ON TO1.OperatorID = B.OperatorID
+
+-- Join Payments (only successful ones)
+LEFT JOIN Payment P 
+    ON B.BookingID = P.BookingID 
+    AND P.TransactionStatus = 'Successful'
+
+-- Join Reviews via TripID
+LEFT JOIN Review R 
+    ON B.TripID = R.TripID
+
+-- Join Inquiries directly for response time
+LEFT JOIN Inquiries I 
+    ON TO1.OperatorID = I.OperatorID
+
+GROUP BY 
+    TO1.OperatorID, TO1.CompanyName
+
+ORDER BY 
+    TO1.CompanyName;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OperatorID" DataSetColumn="OperatorID" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="AverageRating" DataSetColumn="AverageRating" />
+              <Mapping SourceColumn="TotalRevenueUSD" DataSetColumn="TotalRevenueUSD" />
+              <Mapping SourceColumn="AverageResponseTimeMinutes" DataSetColumn="AverageResponseTimeMinutes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OperatorPerfomanceData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="OperatorPerfomanceData" msprop:Generator_DataSetName="OperatorPerfomanceData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TourOperator" msprop:Generator_RowEvHandlerName="TourOperatorRowChangeEventHandler" msprop:Generator_RowDeletedName="TourOperatorRowDeleted" msprop:Generator_RowDeletingName="TourOperatorRowDeleting" msprop:Generator_RowEvArgName="TourOperatorRowChangeEvent" msprop:Generator_TablePropName="TourOperator" msprop:Generator_RowChangedName="TourOperatorRowChanged" msprop:Generator_RowChangingName="TourOperatorRowChanging" msprop:Generator_TableClassName="TourOperatorDataTable" msprop:Generator_RowClassName="TourOperatorRow" msprop:Generator_TableVarName="tableTourOperator" msprop:Generator_UserTableName="TourOperator">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OperatorID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="OperatorID" msprop:Generator_ColumnPropNameInTable="OperatorIDColumn" msprop:Generator_ColumnVarNameInTable="columnOperatorID" msprop:Generator_UserColumnName="OperatorID" type="xs:int" />
+              <xs:element name="CompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_UserColumnName="CompanyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AverageRating" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AverageRating" msprop:Generator_ColumnPropNameInTable="AverageRatingColumn" msprop:Generator_ColumnVarNameInTable="columnAverageRating" msprop:Generator_UserColumnName="AverageRating" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalRevenueUSD" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="TotalRevenueUSD" msprop:Generator_ColumnPropNameInTable="TotalRevenueUSDColumn" msprop:Generator_ColumnVarNameInTable="columnTotalRevenueUSD" msprop:Generator_UserColumnName="TotalRevenueUSD" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AverageResponseTimeMinutes" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AverageResponseTimeMinutes" msprop:Generator_ColumnPropNameInTable="AverageResponseTimeMinutesColumn" msprop:Generator_ColumnVarNameInTable="columnAverageResponseTimeMinutes" msprop:Generator_UserColumnName="AverageResponseTimeMinutes" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TourOperator" />
+      <xs:field xpath="mstns:OperatorID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

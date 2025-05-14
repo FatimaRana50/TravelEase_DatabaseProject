@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Abandon" targetNamespace="http://tempuri.org/Abandon.xsd" xmlns:mstns="http://tempuri.org/Abandon.xsd" xmlns="http://tempuri.org/Abandon.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TravelEase2ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TravelEase2ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DB_module2.Properties.Settings.GlobalReference.Default.TravelEase2ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AbandonedBookingTableAdapter" GeneratorDataComponentClassName="AbandonedBookingTableAdapter" Name="AbandonedBooking" UserDataComponentName="AbandonedBookingTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TravelEase2ConnectionString (Settings)" DbObjectName="TravelEase2.dbo.AbandonedBooking" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT BookingID,
+    AbandonmentReason, 
+    COUNT(*) AS Count,
+    SUM(ExpectedAmount) AS TotalLoss,
+    SUM(CASE WHEN IsRecovered = 1 THEN 1 ELSE 0 END) AS RecoveredCount
+FROM AbandonedBooking
+GROUP BY AbandonmentReason,BookingID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AbandonmentReason" DataSetColumn="AbandonmentReason" />
+              <Mapping SourceColumn="Count" DataSetColumn="Count" />
+              <Mapping SourceColumn="TotalLoss" DataSetColumn="TotalLoss" />
+              <Mapping SourceColumn="RecoveredCount" DataSetColumn="RecoveredCount" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Abandon" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="Abandon" msprop:Generator_DataSetName="Abandon">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AbandonedBooking" msprop:Generator_RowEvHandlerName="AbandonedBookingRowChangeEventHandler" msprop:Generator_RowDeletedName="AbandonedBookingRowDeleted" msprop:Generator_RowDeletingName="AbandonedBookingRowDeleting" msprop:Generator_RowEvArgName="AbandonedBookingRowChangeEvent" msprop:Generator_TablePropName="AbandonedBooking" msprop:Generator_RowChangedName="AbandonedBookingRowChanged" msprop:Generator_RowChangingName="AbandonedBookingRowChanging" msprop:Generator_TableClassName="AbandonedBookingDataTable" msprop:Generator_RowClassName="AbandonedBookingRow" msprop:Generator_TableVarName="tableAbandonedBooking" msprop:Generator_UserTableName="AbandonedBooking">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AbandonmentReason" msprop:Generator_ColumnPropNameInRow="AbandonmentReason" msprop:Generator_ColumnPropNameInTable="AbandonmentReasonColumn" msprop:Generator_ColumnVarNameInTable="columnAbandonmentReason" msprop:Generator_UserColumnName="AbandonmentReason" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Count" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Count" msprop:Generator_ColumnPropNameInTable="CountColumn" msprop:Generator_ColumnVarNameInTable="columnCount" msprop:Generator_UserColumnName="Count" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalLoss" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="TotalLoss" msprop:Generator_ColumnPropNameInTable="TotalLossColumn" msprop:Generator_ColumnVarNameInTable="columnTotalLoss" msprop:Generator_UserColumnName="TotalLoss" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RecoveredCount" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="RecoveredCount" msprop:Generator_ColumnPropNameInTable="RecoveredCountColumn" msprop:Generator_ColumnVarNameInTable="columnRecoveredCount" msprop:Generator_UserColumnName="RecoveredCount" type="xs:int" minOccurs="0" />
+              <xs:element name="BookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_UserColumnName="BookingID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AbandonedBooking" />
+      <xs:field xpath="mstns:BookingID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

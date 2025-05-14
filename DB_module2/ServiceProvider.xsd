@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ServiceProvider" targetNamespace="http://tempuri.org/ServiceProvider.xsd" xmlns:mstns="http://tempuri.org/ServiceProvider.xsd" xmlns="http://tempuri.org/ServiceProvider.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TravelEase2ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TravelEase2ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DB_module2.Properties.Settings.GlobalReference.Default.TravelEase2ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ServiceProviderTableAdapter" GeneratorDataComponentClassName="ServiceProviderTableAdapter" Name="ServiceProvider" UserDataComponentName="ServiceProviderTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TravelEase2ConnectionString (Settings)" DbObjectName="TravelEase2.dbo.ServiceProvider" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>-- Service Provider Efficiency Report Query
+SELECT 
+    SP.ProviderID,
+    SP.ProviderName,
+
+    -- a. Hotel Occupancy Rate
+    ISNULL(AVG(CAST(RS.BookedRooms AS FLOAT) / NULLIF(RS.TotalRooms, 0)), 0) * 100 AS HotelOccupancyRatePercent,
+
+    -- b. Guide Ratings
+    ISNULL(AVG(TGS.Rating), 0) AS AverageGuideRating,
+
+    -- c. Transport On-Time Performance
+    ISNULL(AVG(TS.OnTimePerformance), 0) AS AvgOnTimePerformance,
+
+    -- d. Service Utilization: total services linked to provider (across types)
+    COUNT(DISTINCT S.ServiceID) AS TotalServicesProvided
+
+FROM ServiceProvider SP
+LEFT JOIN Services S ON SP.ProviderID = S.ProviderID
+
+-- Left joins to each specific service type
+LEFT JOIN RoomService RS ON S.ServiceID = RS.ServiceID
+LEFT JOIN TourGuideService TGS ON S.ServiceID = TGS.ServiceID
+LEFT JOIN TransportService TS ON S.ServiceID = TS.ServiceID
+
+GROUP BY SP.ProviderID, SP.ProviderName
+ORDER BY SP.ProviderName;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProviderID" DataSetColumn="ProviderID" />
+              <Mapping SourceColumn="ProviderName" DataSetColumn="ProviderName" />
+              <Mapping SourceColumn="HotelOccupancyRatePercent" DataSetColumn="HotelOccupancyRatePercent" />
+              <Mapping SourceColumn="AverageGuideRating" DataSetColumn="AverageGuideRating" />
+              <Mapping SourceColumn="AvgOnTimePerformance" DataSetColumn="AvgOnTimePerformance" />
+              <Mapping SourceColumn="TotalServicesProvided" DataSetColumn="TotalServicesProvided" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ServiceProvider" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="ServiceProvider" msprop:Generator_DataSetName="ServiceProvider">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ServiceProvider" msprop:Generator_RowEvHandlerName="ServiceProviderRowChangeEventHandler" msprop:Generator_RowDeletedName="ServiceProviderRowDeleted" msprop:Generator_RowDeletingName="ServiceProviderRowDeleting" msprop:Generator_RowEvArgName="ServiceProviderRowChangeEvent" msprop:Generator_TablePropName="_ServiceProvider" msprop:Generator_RowChangedName="ServiceProviderRowChanged" msprop:Generator_RowChangingName="ServiceProviderRowChanging" msprop:Generator_TableClassName="ServiceProviderDataTable" msprop:Generator_RowClassName="ServiceProviderRow" msprop:Generator_TableVarName="tableServiceProvider" msprop:Generator_UserTableName="ServiceProvider">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProviderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="ProviderID" msprop:Generator_ColumnPropNameInTable="ProviderIDColumn" msprop:Generator_ColumnVarNameInTable="columnProviderID" msprop:Generator_UserColumnName="ProviderID" type="xs:int" />
+              <xs:element name="ProviderName" msprop:Generator_ColumnPropNameInRow="ProviderName" msprop:Generator_ColumnPropNameInTable="ProviderNameColumn" msprop:Generator_ColumnVarNameInTable="columnProviderName" msprop:Generator_UserColumnName="ProviderName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HotelOccupancyRatePercent" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="HotelOccupancyRatePercent" msprop:Generator_ColumnPropNameInTable="HotelOccupancyRatePercentColumn" msprop:Generator_ColumnVarNameInTable="columnHotelOccupancyRatePercent" msprop:Generator_UserColumnName="HotelOccupancyRatePercent" type="xs:double" minOccurs="0" />
+              <xs:element name="AverageGuideRating" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AverageGuideRating" msprop:Generator_ColumnPropNameInTable="AverageGuideRatingColumn" msprop:Generator_ColumnVarNameInTable="columnAverageGuideRating" msprop:Generator_UserColumnName="AverageGuideRating" type="xs:double" minOccurs="0" />
+              <xs:element name="AvgOnTimePerformance" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AvgOnTimePerformance" msprop:Generator_ColumnPropNameInTable="AvgOnTimePerformanceColumn" msprop:Generator_ColumnVarNameInTable="columnAvgOnTimePerformance" msprop:Generator_UserColumnName="AvgOnTimePerformance" type="xs:double" minOccurs="0" />
+              <xs:element name="TotalServicesProvided" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="TotalServicesProvided" msprop:Generator_ColumnPropNameInTable="TotalServicesProvidedColumn" msprop:Generator_ColumnVarNameInTable="columnTotalServicesProvided" msprop:Generator_UserColumnName="TotalServicesProvided" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ServiceProvider" />
+      <xs:field xpath="mstns:ProviderID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,1222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DC9CFFE4-A78E-438E-B9B1-E51B22772C68}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DB_module2</RootNamespace>
+    <AssemblyName>DB_module2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>traveleaseicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Cryptography, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Cryptography.8.0.0\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.SqlClient, Version=6.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.6.0.2\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.8.0.1\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.61.3\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.61.3\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.7.5.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.7.5.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.7.5.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.7.5.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.7.5.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.7.5.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ClientModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.7.5.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Pkcs.8.0.1\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.10\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abandon.cs">
+      <DependentUpon>Abandon.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Abandon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Abandon.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Abandon2.cs">
+      <DependentUpon>Abandon2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Abandon2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Abandon2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AbandonmentReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbandonmentReportForm.Designer.cs">
+      <DependentUpon>AbandonmentReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Add_EditService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_EditService.Designer.cs">
+      <DependentUpon>Add_EditService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin.Designer.cs">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminLogin.Designer.cs">
+      <DependentUpon>AdminLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminManageOperator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminManageOperator.Designer.cs">
+      <DependentUpon>AdminManageOperator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminmanageUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminmanageUser.Designer.cs">
+      <DependentUpon>AdminmanageUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminviewsCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminviewsCategory.Designer.cs">
+      <DependentUpon>AdminviewsCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin_SignUP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin_SignUP.Designer.cs">
+      <DependentUpon>Admin_SignUP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuditForm.Designer.cs">
+      <DependentUpon>AuditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookingManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookingManagement.Designer.cs">
+      <DependentUpon>BookingManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookingMoverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookingMoverview.Designer.cs">
+      <DependentUpon>BookingMoverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookingStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookingStatus.Designer.cs">
+      <DependentUpon>BookingStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CancelBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelBooking.Designer.cs">
+      <DependentUpon>CancelBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateTrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateTrip.Designer.cs">
+      <DependentUpon>CreateTrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationData1.cs">
+      <DependentUpon>DestinationData1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationData1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DestinationData1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationData2.cs">
+      <DependentUpon>DestinationData2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationData2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DestinationData2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DestinationReportForm.Designer.cs">
+      <DependentUpon>DestinationReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>formsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageTripsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageTripsForm.Designer.cs">
+      <DependentUpon>ManageTripsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModerateReviews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModerateReviews.Designer.cs">
+      <DependentUpon>ModerateReviews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorPerfomanceData.cs">
+      <DependentUpon>OperatorPerfomanceData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorPerfomanceData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperatorPerfomanceData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorReportForm.Designer.cs">
+      <DependentUpon>OperatorReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentData.cs">
+      <DependentUpon>PaymentData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentReportForm.Designer.cs">
+      <DependentUpon>PaymentReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="performanceAnalytics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="performanceAnalytics.Designer.cs">
+      <DependentUpon>performanceAnalytics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData1.cs">
+      <DependentUpon>PlatformData1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformData1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData2.cs">
+      <DependentUpon>PlatformData2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformData2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData3.cs">
+      <DependentUpon>PlatformData3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformData3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData4.cs">
+      <DependentUpon>PlatformData4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformData4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformData4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformGrowthReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlatformGrowthReportForm.Designer.cs">
+      <DependentUpon>PlatformGrowthReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Prefrences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prefrences.Designer.cs">
+      <DependentUpon>Prefrences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessRefunds.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcessRefunds.Designer.cs">
+      <DependentUpon>ProcessRefunds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileHistory.Designer.cs">
+      <DependentUpon>ProfileHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderApnaData.cs">
+      <DependentUpon>ProviderApnaData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderApnaData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderApnaData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderApniRepform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProviderApniRepform.Designer.cs">
+      <DependentUpon>ProviderApniRepform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderkiBookingMnagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProviderkiBookingMnagement.Designer.cs">
+      <DependentUpon>ProviderkiBookingMnagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProviderManagement.Designer.cs">
+      <DependentUpon>ProviderManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registration.Designer.cs">
+      <DependentUpon>Registration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportMenu.Designer.cs">
+      <DependentUpon>ReportMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCoordination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCoordination.Designer.cs">
+      <DependentUpon>ResourceCoordination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReviewsandRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReviewsandRating.Designer.cs">
+      <DependentUpon>ReviewsandRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchandBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchandBooking.Designer.cs">
+      <DependentUpon>SearchandBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SendReminder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendReminder.Designer.cs">
+      <DependentUpon>SendReminder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceIntegration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceIntegration.Designer.cs">
+      <DependentUpon>ServiceIntegration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceListing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceListing.Designer.cs">
+      <DependentUpon>ServiceListing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProvider.cs">
+      <DependentUpon>ServiceProvider.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProvider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProvider.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceProviderLogin.Designer.cs">
+      <DependentUpon>ServiceProviderLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceProviderReportForm.Designer.cs">
+      <DependentUpon>ServiceProviderReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceSelectionForm.Designer.cs">
+      <DependentUpon>ServiceSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service_Provider_signup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Service_Provider_signup.Designer.cs">
+      <DependentUpon>Service_Provider_signup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="touropLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="touropLogin.Designer.cs">
+      <DependentUpon>touropLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tpass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tpass.Designer.cs">
+      <DependentUpon>Tpass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrackPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrackPayment.Designer.cs">
+      <DependentUpon>TrackPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TravelerManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TravelerManagement.Designer.cs">
+      <DependentUpon>TravelerManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TravelerPreferencesDataSe.cs">
+      <DependentUpon>TravelerPreferencesDataSe.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TravelerPreferencesDataSe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelerPreferencesDataSe.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TravelerReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TravelerReportForm.Designer.cs">
+      <DependentUpon>TravelerReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TravelerReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TravelerReview.Designer.cs">
+      <DependentUpon>TravelerReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="travelpass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="travelpass.Designer.cs">
+      <DependentUpon>travelpass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TravSearchandBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TravSearchandBooking.Designer.cs">
+      <DependentUpon>TravSearchandBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TripBookingReportDataSet.cs">
+      <DependentUpon>TripBookingReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TripBookingReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TripBookingReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TripBookingReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TripBookingReportForm.Designer.cs">
+      <DependentUpon>TripBookingReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TripDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TripDashboard.Designer.cs">
+      <DependentUpon>TripDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tripDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tripDelete.Designer.cs">
+      <DependentUpon>tripDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TripUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TripUpdate.Designer.cs">
+      <DependentUpon>TripUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAssignments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewAssignments.Designer.cs">
+      <DependentUpon>ViewAssignments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewTrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewTrip.Designer.cs">
+      <DependentUpon>viewTrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wishlist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wishlist.Designer.cs">
+      <DependentUpon>Wishlist.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AbandonmentReport.rdlc" />
+    <EmbeddedResource Include="AbandonmentReportForm.resx">
+      <DependentUpon>AbandonmentReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_EditService.resx">
+      <DependentUpon>Add_EditService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin.resx">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminLogin.resx">
+      <DependentUpon>AdminLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminManageOperator.resx">
+      <DependentUpon>AdminManageOperator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminmanageUser.resx">
+      <DependentUpon>AdminmanageUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminviewsCategory.resx">
+      <DependentUpon>AdminviewsCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin_SignUP.resx">
+      <DependentUpon>Admin_SignUP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuditForm.resx">
+      <DependentUpon>AuditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookingManagement.resx">
+      <DependentUpon>BookingManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookingMoverview.resx">
+      <DependentUpon>BookingMoverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookingStatus.resx">
+      <DependentUpon>BookingStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelbooking.resx">
+      <DependentUpon>CancelBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateTrip.resx">
+      <DependentUpon>CreateTrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DestinationReport.rdlc" />
+    <EmbeddedResource Include="DestinationReportForm.resx">
+      <DependentUpon>DestinationReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageTripsForm.resx">
+      <DependentUpon>ManageTripsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModerateReviews.resx">
+      <DependentUpon>ModerateReviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorReport.rdlc" />
+    <EmbeddedResource Include="OperatorReportForm.resx">
+      <DependentUpon>OperatorReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentReport.rdlc" />
+    <EmbeddedResource Include="PaymentReportForm.resx">
+      <DependentUpon>PaymentReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="performanceAnalytics.resx">
+      <DependentUpon>performanceAnalytics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlatformGrowthReport.rdlc" />
+    <EmbeddedResource Include="PlatformGrowthReportForm.resx">
+      <DependentUpon>PlatformGrowthReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prefrences.resx">
+      <DependentUpon>Prefrences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProcessRefunds.resx">
+      <DependentUpon>ProcessRefunds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileHistory.resx">
+      <DependentUpon>ProfileHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ProviderApniRepform.resx">
+      <DependentUpon>ProviderApniRepform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProviderApniReport.rdlc" />
+    <EmbeddedResource Include="ProviderkiBookingMnagement.resx">
+      <DependentUpon>ProviderkiBookingMnagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProviderManagement.resx">
+      <DependentUpon>ProviderManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registration.resx">
+      <DependentUpon>Registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="ReportMenu.resx">
+      <DependentUpon>ReportMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCoordination.resx">
+      <DependentUpon>ResourceCoordination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReviewsandRating.resx">
+      <DependentUpon>ReviewsandRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchandBooking.resx">
+      <DependentUpon>SearchandBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SendReminder.resx">
+      <DependentUpon>SendReminder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceIntegration.resx">
+      <DependentUpon>ServiceIntegration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceListing.resx">
+      <DependentUpon>ServiceListing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceProviderLogin.resx">
+      <DependentUpon>ServiceProviderLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceProviderReport.rdlc" />
+    <EmbeddedResource Include="ServiceProviderReportForm.resx">
+      <DependentUpon>ServiceProviderReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceSelectionForm.resx">
+      <DependentUpon>ServiceSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service_Provider_signup.resx">
+      <DependentUpon>Service_Provider_signup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="touropLogin.resx">
+      <DependentUpon>touropLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tpass.resx">
+      <DependentUpon>Tpass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrackPayment.resx">
+      <DependentUpon>TrackPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TravelerManagement.resx">
+      <DependentUpon>TravelerManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TravelerPreferenceandDemographicReport.rdlc" />
+    <EmbeddedResource Include="TravelerReportForm.resx">
+      <DependentUpon>TravelerReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TravelerReview.resx">
+      <DependentUpon>TravelerReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="travelpass.resx">
+      <DependentUpon>travelpass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TravSearchandBooking.resx">
+      <DependentUpon>TravSearchandBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TripBookingReportForm.resx">
+      <DependentUpon>TripBookingReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TripDashboard.resx">
+      <DependentUpon>TripDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tripDelete.resx">
+      <DependentUpon>tripDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TripUpdate.resx">
+      <DependentUpon>TripUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewAssignments.resx">
+      <DependentUpon>ViewAssignments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewTrip.resx">
+      <DependentUpon>viewTrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wishlist.resx">
+      <DependentUpon>Wishlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Abandon.xsc">
+      <DependentUpon>Abandon.xsd</DependentUpon>
+    </None>
+    <None Include="Abandon.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Abandon.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Abandon.xss">
+      <DependentUpon>Abandon.xsd</DependentUpon>
+    </None>
+    <None Include="Abandon2.xsc">
+      <DependentUpon>Abandon2.xsd</DependentUpon>
+    </None>
+    <None Include="Abandon2.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Abandon2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Abandon2.xss">
+      <DependentUpon>Abandon2.xsd</DependentUpon>
+    </None>
+    <None Include="DestinationData1.xsc">
+      <DependentUpon>DestinationData1.xsd</DependentUpon>
+    </None>
+    <None Include="DestinationData1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DestinationData1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DestinationData1.xss">
+      <DependentUpon>DestinationData1.xsd</DependentUpon>
+    </None>
+    <None Include="DestinationData2.xsc">
+      <DependentUpon>DestinationData2.xsd</DependentUpon>
+    </None>
+    <None Include="DestinationData2.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DestinationData2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DestinationData2.xss">
+      <DependentUpon>DestinationData2.xsd</DependentUpon>
+    </None>
+    <None Include="formsDataSet.xsc">
+      <DependentUpon>formsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="formsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>formsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="formsDataSet.xss">
+      <DependentUpon>formsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OperatorPerfomanceData.xsc">
+      <DependentUpon>OperatorPerfomanceData.xsd</DependentUpon>
+    </None>
+    <None Include="OperatorPerfomanceData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OperatorPerfomanceData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="OperatorPerfomanceData.xss">
+      <DependentUpon>OperatorPerfomanceData.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="PaymentData.xsc">
+      <DependentUpon>PaymentData.xsd</DependentUpon>
+    </None>
+    <None Include="PaymentData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PaymentData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PaymentData.xss">
+      <DependentUpon>PaymentData.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData1.xsc">
+      <DependentUpon>PlatformData1.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PlatformData1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PlatformData1.xss">
+      <DependentUpon>PlatformData1.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData2.xsc">
+      <DependentUpon>PlatformData2.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData2.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PlatformData2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PlatformData2.xss">
+      <DependentUpon>PlatformData2.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData3.xsc">
+      <DependentUpon>PlatformData3.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData3.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PlatformData3.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PlatformData3.xss">
+      <DependentUpon>PlatformData3.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData4.xsc">
+      <DependentUpon>PlatformData4.xsd</DependentUpon>
+    </None>
+    <None Include="PlatformData4.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PlatformData4.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PlatformData4.xss">
+      <DependentUpon>PlatformData4.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ProviderApnaData.xsc">
+      <DependentUpon>ProviderApnaData.xsd</DependentUpon>
+    </None>
+    <None Include="ProviderApnaData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProviderApnaData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ProviderApnaData.xss">
+      <DependentUpon>ProviderApnaData.xsd</DependentUpon>
+    </None>
+    <None Include="ServiceProvider.xsc">
+      <DependentUpon>ServiceProvider.xsd</DependentUpon>
+    </None>
+    <None Include="ServiceProvider.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ServiceProvider.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ServiceProvider.xss">
+      <DependentUpon>ServiceProvider.xsd</DependentUpon>
+    </None>
+    <None Include="TravelerPreferencesDataSe.xsc">
+      <DependentUpon>TravelerPreferencesDataSe.xsd</DependentUpon>
+    </None>
+    <None Include="TravelerPreferencesDataSe.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TravelerPreferencesDataSe.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TravelerPreferencesDataSe.xss">
+      <DependentUpon>TravelerPreferencesDataSe.xsd</DependentUpon>
+    </None>
+    <None Include="TripBookingReportDataSet.xsc">
+      <DependentUpon>TripBookingReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TripBookingReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TripBookingReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TripBookingReportDataSet.xss">
+      <DependentUpon>TripBookingReportDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic6.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic12.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic14.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic141.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic15.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic16.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %288%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %289%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2810%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2811%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2812%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2813%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %285%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2816%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2817%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2818%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2819%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2820%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2821%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2822%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2823%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2824%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2825%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2826%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2827%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2828%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2829%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2830%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2831%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2832%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2833%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2834%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2835%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2835%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2835%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2836%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2837%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled design %2840%29.png" />
+    <None Include="Resources\images %282%29.jpeg" />
+    <Content Include="traveleaseicon.ico" />
+    <None Include="Resources\Untitled design %2838%29.png" />
+    <None Include="Resources\Untitled design %2839%29.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
+  </Target>
+</Project>
